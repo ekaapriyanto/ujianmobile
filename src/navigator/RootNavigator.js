@@ -12,27 +12,26 @@ const Stack = createStackNavigator()
 
 export default ({navigation}) => {
 
-    const dispatch = useDispatch()
-    const userSelector = useSelector((state) => state.user); 
-
+    const dispatch = useDispatch();
+    const userSelector = useSelector((state) => state.user);
+    
     useEffect(() => {
         console.log(userSelector.username)
         AsyncStorage.getItem("userData")
-        .then((res) => {
-            if (!res) throw "Item Kosong"
+        .then((storageItem) => {
+            if (!storageItem) throw "Item is empty";
             dispatch({
                 type: "USER_LOGIN",
-                payload: { username: res}
-            })
+                payload: JSON.parse(storageItem),
+            });
         })
         .catch((err) => {
-            console.log(err)
-        })
-    }, []);
+            console.log(err);
+        });
+      }, []);
 
     return(
         <NavigationContainer>
-            <StatusBar style="dark"/>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {userSelector.username ? (
                     <Stack.Screen name="maintab" component={MainTab}/>

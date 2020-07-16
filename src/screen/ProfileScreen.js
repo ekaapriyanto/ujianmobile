@@ -64,7 +64,7 @@ export default function App() {
       <View
         style={{
           ...StyleSheet.absoluteFillObject,
-          backgroundColor: "black",
+          backgroundColor: "#fff",
           opacity: 0.5,
         }}
       />

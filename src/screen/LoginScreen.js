@@ -15,7 +15,7 @@ import {
 import { Icon } from "native-base";
 import LoginBg from "../../assets/images/login_bg.png"
 import AsyncStorage from "@react-native-community/async-storage";
-
+import {Provider, useDispatch, useSelector} from "react-redux"
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -30,23 +30,30 @@ const styles = StyleSheet.create({
 })
 
 export default ({props}) => {
-
     const [username, setUsername] = useState("");
-    
+    const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch();
+    const userSelector = useSelector((state) => state.user);
+
     const loginBtnHandler = () => {
         console.log(username)
-        // console.log(user)
-        AsyncStorage.setItem("userData", {username})
-        .then(() => {
-            dispatc({
-                type: "USER_LOGIN",
-                payload: { username }
+        AsyncStorage.setItem(
+            "userData",
+            JSON.stringify({
+                username,
             })
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }
+        )
+            .then(() => {
+                dispatch({
+                    type: "USER_LOGIN",
+                    payload: { username },
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <>
         <ImageBackground source={LoginBg} style={{...styles.bgImage}}>

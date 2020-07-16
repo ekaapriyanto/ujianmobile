@@ -1,7 +1,7 @@
 const init_state = {
-    id: 0,
-    username: "",
-    restaurant: "Nama"
+    // id: 0,
+    username: ""
+    // restaurant: "Nama"
   };
   
   export default (state = init_state, action) => {

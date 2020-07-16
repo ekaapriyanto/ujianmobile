@@ -21,8 +21,8 @@ export default () => {
 
     return(
         <Stack.Navigator>
-            <Stack.Screen component={HomeScreen} name="home" options={{ title: userSelector.username}} />
-            <Stack.Screen component={RestaurantDetailsScreen } name="home" options={{ title: userSelector.restaurant}} />
+            <Stack.Screen component={HomeScreen} name="home" />
+            <Stack.Screen component={RestaurantDetailsScreen } name="details"/>
         </Stack.Navigator>
     )
 }
